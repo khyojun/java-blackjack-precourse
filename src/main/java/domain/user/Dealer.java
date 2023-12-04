@@ -29,4 +29,17 @@ public class Dealer {
     public List<Card> getCards() {
         return cards;
     }
+
+
+    public String buildConvertCardStatus() {
+        List<String> convertCards = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.checkSpecialSymbol()) {
+                convertCards.add(card.specialSymbol());
+                continue;
+            }
+            convertCards.add(card.normalSymbol());
+        }
+        return String.join(", ", convertCards);
+    }
 }

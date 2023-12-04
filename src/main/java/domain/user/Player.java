@@ -2,7 +2,6 @@ package domain.user;
 
 import domain.card.Card;
 
-import domain.card.CardFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,5 +40,19 @@ public class Player {
     }
 
 // TODO 추가 기능 구현
+
+
+
+    public String buildConvertCardStatus() {
+        List<String> convertCards = new ArrayList<>();
+        for (Card card : cards) {
+            if (card.checkSpecialSymbol()) {
+                convertCards.add(card.specialSymbol());
+                continue;
+            }
+            convertCards.add(card.normalSymbol());
+        }
+        return String.join(", ", convertCards);
+    }
 
 }

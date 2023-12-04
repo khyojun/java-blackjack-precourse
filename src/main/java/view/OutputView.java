@@ -52,31 +52,13 @@ public class OutputView {
     }
 
     private void notifyDealerCard(Dealer dealer) {
-        List<Card> delalerCards = dealer.getCards();
-        print(String.format("딜러카드: %s", convertToStatus(delalerCards)));
+        print(String.format("딜러카드: %s", dealer.buildConvertCardStatus()));
     }
 
     private void notifyPlayerCard(Player player) {
-        List<Card> playerCards = player.getCards();
-         print(String.format("%s카드: %s", player.getName(),convertToStatus(playerCards)));
+         print(String.format("%s카드: %s", player.getName(),player.buildConvertCardStatus()));
     }
 
-    private String convertToStatus(List<Card> cards) {
-        StringBuilder convertBuilder = new StringBuilder();
-        return buildConvertBuilder(cards, convertBuilder);
-    }
-
-    private String buildConvertBuilder(List<Card> cards, StringBuilder convertBuilder) {
-        List<String> convertCards = new ArrayList<>();
-        for (Card card : cards) {
-            if (card.checkSpecialSymbol()) {
-                convertCards.add(card.specialSymbol());
-                continue;
-            }
-            convertCards.add(card.normalSymbol());
-        }
-        return convertCards.stream().collect(Collectors.joining(", "));
-    }
 
 
 }

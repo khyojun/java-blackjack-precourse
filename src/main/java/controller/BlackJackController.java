@@ -37,6 +37,7 @@ public class BlackJackController implements GameController{
         notifyCards(players,dealer);
 
 
+
     }
 
     private void notifyCards(List<Player> players, Dealer dealer) {
