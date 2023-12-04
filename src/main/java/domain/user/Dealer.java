@@ -2,6 +2,7 @@ package domain.user;
 
 import domain.card.Card;
 
+import domain.card.Symbol;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,15 +32,31 @@ public class Dealer {
     }
 
 
-    public String buildConvertCardStatus() {
+    public String showOneCard() {
         List<String> convertCards = new ArrayList<>();
         for (Card card : cards) {
             if (card.checkSpecialSymbol()) {
                 convertCards.add(card.specialSymbol());
-                continue;
+                break;
             }
             convertCards.add(card.normalSymbol());
+            break;
         }
         return String.join(", ", convertCards);
+    }
+
+    public boolean judgeOverLimitNumber() {
+        return cards.stream()
+            .map(Card::getSymbol)
+            .map(Symbol::getScore)
+            .mapToInt(Integer::intValue)
+            .sum() > 17;
+    }
+
+    public void pickOneCards(List<Card> entireCards) {
+        Random random = new Random();
+        for (int i = 0; i < 1; i++) {
+            this.addCard(cards.get(random.nextInt(cards.size() - 1)));
+        }
     }
 }

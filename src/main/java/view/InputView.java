@@ -33,4 +33,13 @@ public class InputView {
             return inputBatting(name);
         }
     }
+
+    public boolean inputPick() {
+        String s = scanner.nextLine();
+        if(s.equals("y"))
+            return true;
+        if(s.equals("n"))
+            return false;
+        throw new IllegalArgumentException("[ERROR] 유효한 뽑기를 위한 입력이 아닙니다! ");
+    }
 }

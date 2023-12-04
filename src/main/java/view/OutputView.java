@@ -1,10 +1,8 @@
 package view;
 
 
-import domain.card.Card;
 import domain.user.Dealer;
 import domain.user.Player;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,15 +42,16 @@ public class OutputView {
 
     }
 
-    public void printNowCardStatus(List<Player> players, Dealer dealer) {
+    public void printPlayerCardStatus(Player player) {
+        notifyPlayerCard(player);
+    }
+
+    public void printDealerCardStatus(Dealer dealer){
         notifyDealerCard(dealer);
-        for (Player player : players) {
-            notifyPlayerCard(player);
-        }
     }
 
     private void notifyDealerCard(Dealer dealer) {
-        print(String.format("딜러카드: %s", dealer.buildConvertCardStatus()));
+        print(String.format("딜러카드: %s", dealer.showOneCard()));
     }
 
     private void notifyPlayerCard(Player player) {
@@ -60,5 +59,17 @@ public class OutputView {
     }
 
 
+    public void printAskPick(String name) {
+        print(String.format("%s는 한 장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)", name));
+    }
 
+    public void printAskPickDealer() {
+        print("딜러는 16이하라 한 장의 카드를 더 받았습니다.");
+    }
+
+    public void printPlayersCardStatus(List<Player> players) {
+        for (Player player : players) {
+            notifyPlayerCard(player);
+        }
+    }
 }

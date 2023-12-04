@@ -16,10 +16,11 @@ import view.OutputView;
 
 public class BlackJackController implements GameController{
 
+
+    private List<Card> entireCards = CardFactory.create();
     private InputView inputView;
     private OutputView outputView;
     private PolicyChecker policyChecker;
-
     private Dealer dealer;
 
 
@@ -35,19 +36,76 @@ public class BlackJackController implements GameController{
         List<Player> players = inputPlayer();
         pickCard(players, dealer);
         notifyCards(players,dealer);
-
+        for(int turn=0; ; turn++){
+            if(!pickExtraCard(players,dealer))
+                break;
+        }
+        resultShow(players,dealer);
 
 
     }
+
+    private void resultShow(List<Player> players, Dealer dealer) {
+        outputView.printBeforeNotify(players);
+        outputView.printDealerCardStatus(dealer);
+        outputView.printPlayersCardStatus(players);
+    }
+
+    private boolean pickExtraCard(List<Player> players, Dealer dealer) {
+        Boolean turnConsistent = false;
+        for (Player player : players) {
+            turnConsistent=false;
+            turnConsistent = pickExtraProcess(player, turnConsistent);
+        }
+        if(isDealerNotOverLimitNumber(dealer)){
+                turnConsistent= true;
+                dealer.pickOneCards(entireCards);
+        }
+        return turnConsistent;
+    }
+
+    private boolean pickExtraProcess(Player player, Boolean turnConsistent) {
+        if(player.judgeOverLimitNumber()){
+            return false;
+        }
+        while(isPlayerPickExtraCard(player)){
+            turnConsistent=true;
+            player.pickOneCards(entireCards);
+            outputView.printPlayerCardStatus(player);
+        }
+        if(!turnConsistent){
+            outputView.printPlayerCardStatus(player);
+        }
+        return turnConsistent;
+    }
+
+    private boolean isDealerNotOverLimitNumber(Dealer dealer) {
+        return !dealer.judgeOverLimitNumber();
+    }
+
+
+    private boolean isPlayerPickExtraCard(Player player) {
+        try {
+             if(!player.judgeOverLimitNumber()) {
+                 outputView.printAskPick(player.getName());
+                 return inputView.inputPick();
+             }
+             return false;
+        }catch (IllegalArgumentException error){
+            outputView.printError(error.getMessage());
+            return isPlayerPickExtraCard(player);
+        }
+    }
+
+
 
     private void notifyCards(List<Player> players, Dealer dealer) {
         outputView.printBeforeNotify(players);
-        outputView.printNowCardStatus(players, dealer);
-
+        outputView.printDealerCardStatus(dealer);
+        outputView.printPlayersCardStatus(players);
     }
 
-    private static void pickCard(List<Player> players, Dealer dealer) {
-        List<Card> entireCards = CardFactory.create();
+    private void pickCard(List<Player> players, Dealer dealer) {
         for (Player player : players) {
             player.pickCards(entireCards);
         }
