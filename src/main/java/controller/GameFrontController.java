@@ -2,11 +2,13 @@ package controller;
 
 public class GameFrontController {
 
+    private GameController gameController;
 
-    public static GameController controller;
+    public GameFrontController(GameController gameController) {
+        this.gameController = gameController;
+    }
 
-
-    public GameController getController(GameController gameController) {
-        return controller;
+    public GameController getController() {
+        return gameController;
     }
 }
