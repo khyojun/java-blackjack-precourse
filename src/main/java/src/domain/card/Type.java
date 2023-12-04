@@ -1,4 +1,4 @@
-package domain.card;
+package src.domain.card;
 
 public enum Type {
     SPADE,
