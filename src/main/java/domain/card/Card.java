@@ -68,4 +68,13 @@ public class Card {
         return symbol == JACK || symbol == QUEEN || symbol == KING
             || symbol == ACE;
     }
+
+    public String specialSymbol(){
+        return convertSpecialNumber() + getType().toString();
+    }
+
+    public String normalSymbol(){
+        return symbol.getScore() + getType().toString();
+    }
+
 }

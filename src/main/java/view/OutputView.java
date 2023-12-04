@@ -4,10 +4,9 @@ package view;
 import domain.card.Card;
 import domain.user.Dealer;
 import domain.user.Player;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Delayed;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OutputView {
 
@@ -64,16 +63,19 @@ public class OutputView {
 
     private String convertToStatus(List<Card> cards) {
         StringBuilder convertBuilder = new StringBuilder();
+        return buildConvertBuilder(cards, convertBuilder);
+    }
 
+    private String buildConvertBuilder(List<Card> cards, StringBuilder convertBuilder) {
+        List<String> convertCards = new ArrayList<>();
         for (Card card : cards) {
             if (card.checkSpecialSymbol()) {
-                convertBuilder.append(card.convertSpecialNumber());
+                convertCards.add(card.specialSymbol());
                 continue;
             }
-            convertBuilder.append(card.)
+            convertCards.add(card.normalSymbol());
         }
-
-        return cards.stream().map(Card::).collect(Collectors.joining(", "));
+        return convertCards.stream().collect(Collectors.joining(", "));
     }
 
 
