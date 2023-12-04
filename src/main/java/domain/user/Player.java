@@ -2,8 +2,10 @@ package domain.user;
 
 import domain.card.Card;
 
+import domain.card.CardFactory;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 게임 참여자를 의미하는 객체
@@ -22,6 +24,22 @@ public class Player {
         cards.add(card);
     }
 
-    // TODO 추가 기능 구현
+
+    public String getName() {
+        return name;
+    }
+
+    public void pickCards(List<Card> cards) {
+        Random random = new Random();
+        for (int i = 0; i < 2; i++) {
+            this.addCard(cards.get(random.nextInt(cards.size()-1)));
+        }
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+// TODO 추가 기능 구현
 
 }

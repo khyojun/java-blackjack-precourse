@@ -1,5 +1,8 @@
 package controller;
 
+import domain.card.Card;
+import domain.card.CardFactory;
+import domain.user.Dealer;
 import domain.user.Player;
 import domain.user.PlayerConverter;
 import java.util.Arrays;
@@ -17,16 +20,37 @@ public class BlackJackController implements GameController{
     private OutputView outputView;
     private PolicyChecker policyChecker;
 
-    public BlackJackController(InputView inputView, OutputView outputView) {
+    private Dealer dealer;
+
+
+    public BlackJackController(InputView inputView, OutputView outputView,Dealer dealer
+        ) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.dealer = dealer;
     }
 
     @Override
     public void start() {
         List<Player> players = inputPlayer();
-        System.out.println(players);
+        pickCard(players, dealer);
+        notifyCards(players,dealer);
 
+
+    }
+
+    private void notifyCards(List<Player> players, Dealer dealer) {
+        outputView.printBeforeNotify(players);
+        outputView.printNowCardStatus(players, dealer);
+
+    }
+
+    private static void pickCard(List<Player> players, Dealer dealer) {
+        List<Card> entireCards = CardFactory.create();
+        for (Player player : players) {
+            player.pickCards(entireCards);
+        }
+        dealer.pickCards(entireCards);
     }
 
     private List<Player> inputPlayer() {
