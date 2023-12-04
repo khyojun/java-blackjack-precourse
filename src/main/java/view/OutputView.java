@@ -1,6 +1,5 @@
 package view;
 
-import com.sun.org.apache.xml.internal.serializer.OutputPropertyUtils;
 
 public class OutputView {
 
@@ -14,4 +13,11 @@ public class OutputView {
         return instance;
     }
 
+    public void printError(String error) {
+        print(error);
+    }
+
+    private void print(String output) {
+        System.out.println(output);
+    }
 }
