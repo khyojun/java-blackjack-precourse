@@ -1,4 +1,4 @@
-package domain.card;
+package src.domain.card;
 
 import java.util.Objects;
 
@@ -24,6 +24,15 @@ public class Card {
         Card card = (Card) o;
         return symbol == card.symbol &&
                 type == card.type;
+    }
+
+
+    public Symbol getSymbol(){
+        return symbol;
+    }
+
+    public Type getType(){
+        return type;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package domain.card;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import src.domain.card.Card;
+import src.domain.card.CardFactory;
 
 public class CardFactoryTest {
     @Test

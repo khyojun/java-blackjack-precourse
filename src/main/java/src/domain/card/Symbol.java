@@ -1,4 +1,4 @@
-package domain.card;
+package src.domain.card;
 
 public enum Symbol {
     ACE(1),
@@ -24,4 +24,5 @@ public enum Symbol {
     public int getScore() {
         return score;
     }
+
 }
