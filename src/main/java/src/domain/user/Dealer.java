@@ -26,5 +26,13 @@ public class Dealer {
         return cards;
     }
 
+    public int totalScore(){
+        int totalScore = 0;
+        for (Card card : cards) {
+            totalScore += card.getSymbol().getScore();
+        }
+        return totalScore;
+    }
+
     // TODO 추가 기능 구현
 }

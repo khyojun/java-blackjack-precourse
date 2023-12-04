@@ -9,29 +9,29 @@ import src.domain.user.Player;
 
 public class BlackjackCardService {
 
-    private final List<Card> cards;
+    private List<Card> cards;
 
     public void distributeTwoCard(List<Player> players, Dealer dealer){
 
         for(Player player : players){
             for(int  i=0; i<2; i++){
-                shuffleDeck();
                 player.addCard(dealCard());
             }
         }
 
         for(int  i=0; i<2; i++){
-            shuffleDeck();
             dealer.addCard(dealCard());
         }
+
     }
 
     public BlackjackCardService(List<Card> cards){
         this.cards = cards;
+        shuffleDeck();
     }
 
     void shuffleDeck() {
-        Collections.shuffle(cards);
+        Collections.shuffle(this.cards);
     }
 
     // 카드 한 장 뽑기

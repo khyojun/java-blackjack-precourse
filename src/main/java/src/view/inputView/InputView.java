@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import src.domain.user.Player;
 
 public class InputView {
 
@@ -30,8 +31,16 @@ public class InputView {
         return betAmounts;
     }
 
-
-
+    public boolean askOneMoreCard(Player player){
+        Scanner scanner = new Scanner(System.in);
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까 ?(예는 y, 아니오는 n)",player.getName());
+        System.out.println();
+        String yesNo = scanner.nextLine();
+        if(yesNo.equals("y")){
+            return true;
+        }
+        return false;
+    }
 
 
 
