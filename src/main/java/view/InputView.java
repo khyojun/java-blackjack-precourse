@@ -19,8 +19,18 @@ public class InputView {
 
 
     public String inputPlayers() {
-        String value = scanner.next();
-        scanner.close();
-        return value;
+        return scanner.nextLine();
+    }
+
+    public Double inputBatting(String name) {
+        try{
+            System.out.println(String.format("%s의 배팅 금액은?", name)); // 이거 고쳐야함! ㅠㅠ
+            double convertBatting = Double.parseDouble(scanner.nextLine());
+            if(convertBatting<=0)
+                throw new NumberFormatException();
+            return convertBatting;
+        }catch (NumberFormatException e){
+            return inputBatting(name);
+        }
     }
 }
